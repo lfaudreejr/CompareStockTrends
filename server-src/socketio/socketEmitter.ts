@@ -1,5 +1,3 @@
-'use strict'
-
 function stockSocket (socketParam: any) {
   const socketTest = socketParam.of('/test')
 

@@ -1,3 +1,4 @@
+/* eslint-env node, mocha */
 import * as chai from 'chai'
 import config from '../../config/'
 import getStockFromQuandl from '../'
