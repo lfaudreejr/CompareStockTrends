@@ -1,7 +1,7 @@
 /* eslint-env node, mocha */
 // const server = require('../server');
 
-import server from '../server';
+import server from '../';
 
 describe('Server.listen()', () => {
 	it('should wrap an http server', done => {

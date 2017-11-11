@@ -1,10 +1,15 @@
-import axiosMethod from '../helpers/axios';
-import config from '../config/config';
+import get from '../axios/'
+import config from '../config/'
 
-function getStockFromQuandl(stock = 'FB', start = '2017'): any {
-	const url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?api_key=${config.QUANDL_KEY}&start_data=${start}`;
-
-	return axiosMethod('get')(url);
+// getStockFromQuandl :: string -> promise
+function getStockFromQuandl (stock: string = 'FB', start: string = '2017') {
+  const url: string = setQuandlUrl(stock, start)
+  return get(url)
 }
 
-export default getStockFromQuandl;
+// setUrl :: string -> string
+function setQuandlUrl (stock: string = 'FB', start: string = '2017') {
+  return `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?api_key=${config.quandlKey}&start_data=${start}`
+}
+
+export default getStockFromQuandl

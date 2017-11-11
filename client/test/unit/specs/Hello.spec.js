@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import HelloWorld from '@/components/HelloWorld'
+import HighChart from '@/components/HighChart'
 
-describe('HelloWorld.vue', () => {
+describe('HighChart.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(HelloWorld)
+    const Constructor = Vue.extend(HighChart)
     const vm = new Constructor().$mount()
     expect(vm.$el.querySelector('.hello h1').textContent)
       .to.equal('Welcome to your App, Mr. Faudree')

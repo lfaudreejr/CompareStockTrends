@@ -1,0 +1,4 @@
+export const ADD_STOCK = 'ADD_STOCK'
+export const REMOVE_STOCK = 'REMOVE_STOCK'
+export const CONNECTION_SET = 'CONNECTION_SET'
+export const CONNECTION_END = 'CONNECTION_END'

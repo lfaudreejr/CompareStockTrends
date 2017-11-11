@@ -1,17 +1,38 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <HighChart/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import { mapGetters, mapActions } from 'vuex'
+import HighChart from './components/HighChart'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HighChart
+  },
+  computed: {
+    ...mapGetters({
+      socket: 'getSocket'
+    })
+  },
+  methods: {
+    ...mapActions({
+      connection: 'setConnection',
+      closeConnection: 'endConnection'
+    })
+  },
+  created () {
+    this.connection('test') // TODO: remove if not testing
+    this.socket.on('connected', (resp) => {
+      console.log(resp)
+    })
+    this.socket.on('disconnect', () => {
+      console.log('Socket disconnected')
+    })
   }
 }
 </script>
