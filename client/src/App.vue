@@ -28,7 +28,7 @@ export default {
   created () {
     this.connection('test') // TODO: remove if not testing
     this.socket.on('connected', (resp) => {
-      console.log(resp)
+      console.log('Socket in Highchart', resp)
     })
     this.socket.on('disconnect', () => {
       console.log('Socket disconnected')

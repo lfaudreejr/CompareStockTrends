@@ -1,8 +1,10 @@
-import stockSocket from './socketEmitter'
-import createSocket from './socketIO'
+import testEvents from './testEvents'
+import stockEvents from './stockEvents'
+import createSocket from './createSocket'
 
 const socket = {
-  stockSocket,
+  testEvents,
+  stockEvents,
   createSocket
 }
 
