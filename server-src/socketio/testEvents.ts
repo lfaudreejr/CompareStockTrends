@@ -1,31 +1,53 @@
-import * as mongo from './../mongoDB/stocksMongo'
+import mongo from './../mongoDB/'
+import quandlApi from '../quandlApi/'
 
-function testEvents (socketParam: any) {
-  /**
+/**
    * Testing Socket handler
    */
+function testEvents (socketParam: any) {
   const socketTest = socketParam.of('/test')
-  socketTest.on('connection', onConnect)
+  socketTest.on('connection', async (socket: any) => {
+    const stocks = await mongo.readAll()
+    stocks.forEach((stock: any) => {
+      socket.emit('connected', stock)
+    })
+
+    socket.on('search', (data: any) => {
+      const search = handleSearch(data)
+      search.then((results: any) => {
+        socket.broadcast.emit('results', results)
+      })
+    })
+  })
   socketTest.on('disconnect', () => {
     console.log('Client disconnected')
   })
 }
 
-async function onConnect (socket: any) {
-  /**
-   *  Socket handler
-   */
-  console.log(`Connected to Socket ${socket.id}`)
-  const stocks = await mongo.readAll()
-  socket.emit('connected', JSON.stringify(stocks))
-  socket.on('search', handleSearch)
-}
-
-function handleSearch (data: any) {
-  /**
+/**
    *  Socket handler stock search from client
    */
-  console.log(`Searching for ${data}`)
+function handleSearch (data: any) {
+  const get = quandlApi.getStock(data, '2017')
+
+  return get
+    .then(async (results: any) => {
+      let { id, dataset_code, data } = results.data.dataset
+
+      let stock = await mongo.read(id)
+
+      if (stock) {
+        return stock
+      } else {
+        stock = mongo.create(id, dataset_code, data)
+        return stock.then((createdStock: any) => {
+          return createdStock
+        })
+      }
+    })
+    .catch((err: Error) => {
+      throw new Error('Error in handleSearch')
+    })
 }
 
 export default testEvents

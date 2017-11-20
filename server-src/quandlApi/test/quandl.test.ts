@@ -1,6 +1,4 @@
 /* eslint-env node, mocha */
-require('dotenv').config()
-
 import * as chai from 'chai'
 import config from '../../config/'
 import getStockFromQuandl from '../'

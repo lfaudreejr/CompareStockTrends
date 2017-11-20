@@ -1,4 +1,3 @@
-require('dotenv').config()
 import * as express from 'express'
 import * as compression from 'compression'
 import * as path from 'path'

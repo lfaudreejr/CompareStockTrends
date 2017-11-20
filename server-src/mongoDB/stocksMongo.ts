@@ -41,14 +41,18 @@ export function readAll (): any {
   })
 }
 
-export function read (symbol: any): any {
+export function read (id: any): any {
   return connectDB().then((db: any) => {
     let collection = db.collection('stocks')
     return collection
-      .findOne({ symbol: symbol })
+      .findOne({ id: id })
       .then((doc: any) => {
-        let stock = new Stock(doc.symbol, doc.data)
-        return stock
+        if (doc) {
+          let stock = new Stock(doc.id, doc.symbol, doc.data)
+          return stock
+        } else {
+          return null
+        }
       })
       .catch((err: any) => {
         console.error(err)
@@ -56,12 +60,13 @@ export function read (symbol: any): any {
   })
 }
 
-export function create (symbol: any, data: any): any {
+export function create (id: number, symbol: any, data: any): any {
   return connectDB().then((db: any) => {
-    let stock = new Stock(symbol, data)
+    let stock = new Stock(id, symbol, data)
     let collection = db.collection('stocks')
     return collection
       .insertOne({
+        id: id,
         symbol: symbol,
         data: data
       })
@@ -74,9 +79,9 @@ export function create (symbol: any, data: any): any {
   })
 }
 
-export function destroy (symbol: any): any {
+export function destroy (id: any): any {
   return connectDB().then((db: any) => {
     let collection = db.collection('stocks')
-    return collection.findOneAndDelete({ symbol: symbol })
+    return collection.findOneAndDelete({ id: id })
   })
 }

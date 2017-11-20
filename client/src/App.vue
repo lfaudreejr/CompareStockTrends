@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <HighChart/>
   </div>
 </template>
@@ -23,15 +22,6 @@ export default {
     ...mapActions({
       connection: 'setConnection',
       closeConnection: 'endConnection'
-    })
-  },
-  created () {
-    this.connection('test') // TODO: remove if not testing
-    this.socket.on('connected', (resp) => {
-      console.log('Socket in Highchart', resp)
-    })
-    this.socket.on('disconnect', () => {
-      console.log('Socket disconnected')
     })
   }
 }
