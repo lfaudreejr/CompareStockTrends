@@ -1,17 +1,26 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <label>Search for a stock symbol:</label>
-    <input v-model='searchkey' type="text" v-on:keyup.enter.stop.prevent='submitSymbol'/>
-    <p>{{stocks}}</p>
+
+    <div>
+      <chart></chart>
+    </div>
+
+    <div>
+      <label>Search for a stock symbol:</label>
+      <input v-model.trim='searchkey' type="text" v-on:keyup.enter.stop.prevent='submitSymbol'/>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+import Chart from './Chart'
 
 export default {
   name: 'HighChart',
+  components: { Chart },
   data () {
     return {
       msg: 'Welcome to your App, Mr. Faudree',
@@ -20,38 +29,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      socket: 'getSocket',
-      stocks: 'getStocks'
-    }),
-    results: function () {
-      return this.inbound
-    }
+      socket: 'getSocket'
+    })
   },
   methods: {
     submitSymbol (e) {
       this.searchkey = ''
       this.socket.emit('search', e.target.value)
-    },
-    ...mapActions({
-      connection: 'setConnection',
-      closeConnection: 'endConnection',
-      addStock: 'addStock',
-      removeStock: 'removeStock'
-    })
-  },
-  created () {
-    this.connection('test') // TODO: remove if not testing
-    this.socket.on('connected', (resp) => {
-      if (resp) {
-        this.addStock(resp)
-      }
-    })
-    this.socket.on('disconnect', () => {
-      console.log('Socket disconnected')
-    })
-    this.socket.on('results', (data) => {
-      this.addStock(data)
-    })
+    }
   }
 }
 </script>

@@ -4,18 +4,19 @@ import quandlApi from '../quandlApi/'
 /**
    * Testing Socket handler
    */
-function testEvents (socketParam: any) {
+function testEvents (socketParam: SocketIO.Server) {
   const socketTest = socketParam.of('/test')
-  socketTest.on('connection', async (socket: any) => {
+  socketTest.on('connection', async (socket: SocketIO.Socket) => {
     const stocks = await mongo.readAll()
     stocks.forEach((stock: any) => {
       socket.emit('connected', stock)
     })
+    socket.emit('done')
 
-    socket.on('search', (data: any) => {
+    socket.on('search', (data: string) => {
       const search = handleSearch(data)
       search.then((results: any) => {
-        socket.broadcast.emit('results', results)
+        socket.emit('results', results)
       })
     })
   })
@@ -27,7 +28,7 @@ function testEvents (socketParam: any) {
 /**
    *  Socket handler stock search from client
    */
-function handleSearch (data: any) {
+function handleSearch (data: string) {
   const get = quandlApi.getStock(data, '2017')
 
   return get

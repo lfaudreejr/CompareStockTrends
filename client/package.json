@@ -17,6 +17,7 @@
     "highcharts": "^6.0.2",
     "socket.io-client": "^2.0.4",
     "vue": "^2.5.2",
+    "vue-highcharts": "0.0.10",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

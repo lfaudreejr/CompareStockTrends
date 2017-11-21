@@ -1,16 +1,16 @@
 export default class Stock {
-  id: number
-  symbol: string
+  _id: number
+  name: string
   data: any[]
-  constructor (id: number, symbol: string, data: any[]) {
-    this.id = id
-    this.symbol = symbol
+  constructor (id: number, name: string, data: any[]) {
+    this._id = id
+    this.name = name
     this.data = data
   }
   getJSON () {
     return JSON.stringify({
-      id: this.id,
-      name: this.symbol,
+      id: this._id,
+      name: this.name,
       data: this.data
     })
   }

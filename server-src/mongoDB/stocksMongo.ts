@@ -48,7 +48,7 @@ export function read (id: any): any {
       .findOne({ id: id })
       .then((doc: any) => {
         if (doc) {
-          let stock = new Stock(doc.id, doc.symbol, doc.data)
+          let stock = new Stock(doc.id, doc.name, doc.data)
           return stock
         } else {
           return null
@@ -60,16 +60,12 @@ export function read (id: any): any {
   })
 }
 
-export function create (id: number, symbol: any, data: any): any {
+export function create (id: number, name: any, data: any): any {
   return connectDB().then((db: any) => {
-    let stock = new Stock(id, symbol, data)
+    let stock = new Stock(id, name, data)
     let collection = db.collection('stocks')
     return collection
-      .insertOne({
-        id: id,
-        symbol: symbol,
-        data: data
-      })
+      .insertOne(stock)
       .then(() => {
         return stock
       })
