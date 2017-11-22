@@ -15,7 +15,9 @@ export default {
     }
   },
   [types.REMOVE_STOCK] (state, stock) {
-    const index = state.stocks.indexOf(stock)
-    state.stocks.splice(index, 0)
+    let stateCopy = state.stocks.map((x) => x)
+    let index = stateCopy.indexOf(stock)
+    stateCopy.splice(index, 1)
+    state.stocks = stateCopy
   }
 }

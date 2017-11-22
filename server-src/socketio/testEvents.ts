@@ -11,6 +11,7 @@ function testEvents (socketParam: SocketIO.Server) {
     stocks.forEach((stock: any) => {
       socket.emit('connected', stock)
     })
+
     socket.emit('done')
 
     socket.on('search', (data: string) => {
@@ -18,6 +19,11 @@ function testEvents (socketParam: SocketIO.Server) {
       search.then((results: any) => {
         socket.emit('results', results)
       })
+    })
+
+    socket.on('removeStock', (stock) => {
+      mongo.destroy(stock._id)
+      socket.emit('stockRemoved', stock)
     })
   })
   socketTest.on('disconnect', () => {
@@ -33,14 +39,14 @@ function handleSearch (data: string) {
 
   return get
     .then(async (results: any) => {
-      let { id, dataset_code, data } = results.data.dataset
+      let { id, dataset_code, name, data } = results.data.dataset
 
       let stock = await mongo.read(id)
 
       if (stock) {
         return stock
       } else {
-        stock = mongo.create(id, dataset_code, data)
+        stock = mongo.create(id, dataset_code, name, data)
         return stock.then((createdStock: any) => {
           return createdStock
         })
