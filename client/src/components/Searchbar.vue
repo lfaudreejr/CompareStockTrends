@@ -40,6 +40,7 @@ export default {
     },
     deleteStock (stock) {
       // this.removeStock(stock)
+      console.log(stock)
       this.getSocket.emit('removeStock', stock)
     },
     ...mapActions([

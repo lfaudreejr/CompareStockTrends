@@ -16,7 +16,13 @@ export default {
   },
   [types.REMOVE_STOCK] (state, stock) {
     let stateCopy = state.stocks.map((x) => x)
-    let index = stateCopy.indexOf(stock)
+
+    function find (el) {
+      return el.name === stock.name
+    }
+
+    let index = stateCopy.findIndex(find)
+
     stateCopy.splice(index, 1)
     state.stocks = stateCopy
   }
