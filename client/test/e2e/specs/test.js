@@ -13,7 +13,6 @@ module.exports = {
       .waitForElementVisible('#app', 5000)
       .assert.elementPresent('.hello')
       .assert.containsText('h1', 'Welcome to your App, Mr. Faudree')
-      .assert.elementCount('img', 1)
       .end()
   }
 }

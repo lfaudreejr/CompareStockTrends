@@ -1,1 +1,1 @@
-declare module 'mongo-mock'
+declare module 'mongo-mock';

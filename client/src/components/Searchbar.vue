@@ -2,7 +2,7 @@
   <b-container fluid class="bg-dark">
 
     <b-row>
-      <b-col class="box" sm='3' v-for="stock in stocks" :key="stock._id">
+      <b-col class="box" sm='3' v-for="stock in getStocks" :key="stock._id">
         <div>
           <h3>{{stock.name}}<b-button-close @click="deleteStock(stock)">x</b-button-close></h3>
           <p>{{stock.desc}}</p>
@@ -28,26 +28,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      socket: 'getSocket',
-      stocks: 'getStocks'
-    })
+    ...mapGetters([
+      'getSocket',
+      'getStocks'
+    ])
   },
   methods: {
     submitSymbol (e) {
       this.searchkey = ''
-      this.socket.emit('search', e.target.value)
+      this.getSocket.emit('search', e.target.value)
     },
     deleteStock (stock) {
       this.removeStock(stock)
-      this.socket.emit('removeStock', stock)
+      this.getSocket.emit('removeStock', stock)
     },
-    ...mapActions({
-      connection: 'setConnection',
-      closeConnection: 'endConnection',
-      addStock: 'addStock',
-      removeStock: 'removeStock'
-    })
+    ...mapActions([
+      'setConnection',
+      'endConnection',
+      'addStock',
+      'removeStock'
+    ])
   }
 }
 </script>

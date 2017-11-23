@@ -1,4 +1,4 @@
-import * as mongo from './stocksMongo'
+import * as mongo from './stocksMongo';
 
 export default {
   connectDB: mongo.connectDB,
@@ -6,4 +6,4 @@ export default {
   read: mongo.read,
   create: mongo.create,
   destroy: mongo.destroy
-}
+};

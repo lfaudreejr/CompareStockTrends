@@ -1,8 +1,8 @@
-import * as SocketIO from 'socket.io'
-import * as http from 'http'
+import * as SocketIO from 'socket.io';
+import * as http from 'http';
 
 function createSocket (server: http.Server) {
-  return SocketIO(server)
+  return SocketIO(server);
 }
 
-export default createSocket
+export default createSocket;
