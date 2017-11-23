@@ -1,5 +1,6 @@
 import mongo from './../mongoDB/'
 import quandlApi from '../quandlApi/'
+import Stock from '../stocks/Stock'
 
 /**
    * Testing Socket handler
@@ -8,22 +9,20 @@ function testEvents (socketParam: SocketIO.Server) {
   const socketTest = socketParam.of('/test')
   socketTest.on('connection', async (socket: SocketIO.Socket) => {
     const stocks = await mongo.readAll()
-    stocks.forEach((stock: any) => {
+    stocks.forEach((stock: Stock) => {
       socket.emit('connected', stock)
     })
 
-    socket.emit('done')
-
     socket.on('search', (data: string) => {
       const search = handleSearch(data)
-      search.then((results: any) => {
-        socket.emit('results', results)
+      search.then((results: object) => {
+        socket.broadcast.emit('results', results)
       })
     })
 
-    socket.on('removeStock', (stock) => {
+    socket.on('removeStock', (stock: Stock) => {
       mongo.destroy(stock._id)
-      socket.emit('stockRemoved', stock)
+      socket.broadcast.emit('stockRemoved', stock)
     })
   })
   socketTest.on('disconnect', () => {
@@ -47,7 +46,7 @@ function handleSearch (data: string) {
         return stock
       } else {
         stock = mongo.create(id, dataset_code, name, data)
-        return stock.then((createdStock: any) => {
+        return stock.then((createdStock: Stock) => {
           return createdStock
         })
       }

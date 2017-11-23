@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
-function get (url: string): any {
+function get (url: string): AxiosPromise {
   return axios.get(url)
 }
 
