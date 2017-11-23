@@ -32,7 +32,6 @@ export default {
           marginBottom: 40,
           marginLeft: 30,
           marginRight: 30
-          // height: (9 / 16 * 100) + '%'
         },
         credits: {
           enabled: false
@@ -63,7 +62,6 @@ export default {
         legend: {
           enabled: true,
           align: 'left',
-          // verticalAlign: 'top',
           layout: 'horizontal',
           floating: false
         },
@@ -106,12 +104,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      connection: 'setConnection',
-      closeConnection: 'endConnection',
-      addStock: 'addStock',
-      removeStock: 'removeStock'
-    }),
     loadStocks (stock) {
       this.chartConfig.series.push({
         name: stock.name,
@@ -129,30 +121,36 @@ export default {
         }
       })
       this.chartConfig.series.splice(index, 1)
-    }
+    },
+    ...mapActions([
+      'setConnection',
+      'endConnection',
+      'addStock',
+      'removeStock'
+    ])
   },
   computed: {
-    ...mapGetters({
-      socket: 'getSocket',
-      stocks: 'getStocks'
-    })
+    ...mapGetters([
+      'getSocket',
+      'getStocks'
+    ])
   },
   mounted () {
-    this.connection('test') // TODO: remove if not testing
-    this.socket.on('connected', (resp) => {
+    this.setConnection('test') // TODO: remove if not testing
+    this.getSocket.on('connected', (resp) => {
       if (resp) {
         this.addStock(resp)
         this.loadStocks(resp)
       }
     })
-    this.socket.on('disconnect', () => {
+    this.getSocket.on('disconnect', () => {
       console.log('Socket disconnected')
     })
-    this.socket.on('results', (data) => {
+    this.getSocket.on('results', (data) => {
       this.addStock(data)
       this.loadStocks(data)
     })
-    this.socket.on('stockRemoved', (stock) => {
+    this.getSocket.on('stockRemoved', (stock) => {
       this.removeSeriesStocks(stock)
     })
   }

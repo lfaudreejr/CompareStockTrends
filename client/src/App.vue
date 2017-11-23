@@ -14,15 +14,15 @@ export default {
     HighChart
   },
   computed: {
-    ...mapGetters({
-      socket: 'getSocket'
-    })
+    ...mapGetters([
+      'getSocket'
+    ])
   },
   methods: {
-    ...mapActions({
-      connection: 'setConnection',
-      closeConnection: 'endConnection'
-    })
+    ...mapActions([
+      'setConnection',
+      'endConnection'
+    ])
   }
 }
 </script>

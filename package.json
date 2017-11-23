@@ -8,7 +8,8 @@
     "prod": "NODE_ENV=production npm start",
     "dev": "NODE_ENV=development concurrently \"npm run start\" \"npm run client\"",
     "client": "npm run start --prefix client",
-    "start": "npm run build:live",
+    "start": "node ./server-dist/index",
+    "dev:start": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./server-src/index.ts"
   },
   "keywords": [],

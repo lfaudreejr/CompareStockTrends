@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
-// import stocks from './modules/stocks'
-// import socket from './modules/socket'
 
 Vue.use(Vuex)
 
@@ -18,8 +16,4 @@ export default new Vuex.Store({
   actions,
   getters,
   mutations
-  // modules: {
-  //   stocks,
-  //   socket
-  // }
 })
