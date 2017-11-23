@@ -1,45 +1,60 @@
 {
-	"name": "comparestocktrends",
-	"version": "1.0.0",
-	"description": "Compare Time-based trends of Equities",
-	"main": "server-src/index.js",
-	"scripts": {
-		"test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./server-src/test/*.test.ts",
-		"start": "npm run build:live",
-		"build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./server-src/index.ts"
-	},
-	"keywords": [],
-	"author": "Larry B Faudree Jr",
-	"license": "ISC",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/lfaudreejr/CompareStockTrends.git"
-	},
-	"bugs": {
-		"url": "https://github.com/lfaudreejr/CompareStockTrends/issues"
-	},
-	"homepage": "https://github.com/lfaudreejr/CompareStockTrends#readme",
-	"dependencies": {
-		"axios": "^0.17.0",
-		"compression": "^1.7.1",
-		"dotenv": "^4.0.0",
-		"express": "^4.16.2",
-		"socket.io": "^2.0.4"
-	},
-	"devDependencies": {
-		"@types/chai": "^4.0.4",
-		"@types/compression": "0.0.34",
-		"@types/dotenv": "^4.0.2",
-		"@types/express": "^4.0.39",
-		"@types/mocha": "^2.2.44",
-		"@types/node": "^8.0.47",
-		"@types/socket.io": "^1.4.31",
-		"chai": "^4.1.2",
-		"eslint": "^4.10.0",
-		"mocha": "^4.0.1",
-		"prettier-eslint": "^8.2.1",
-		"supertest": "^3.0.0",
-		"ts-node": "^3.3.0",
-		"typescript": "^2.6.1"
-	}
+  "name": "comparestocktrends",
+  "version": "1.0.0",
+  "description": "Compare Time-based trends of Equities",
+  "main": "server-src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require ts-node/register ./server-src/**/**/**/*.test.ts",
+    "prod": "NODE_ENV=production npm start",
+    "dev": "NODE_ENV=development concurrently \"npm run start\" \"npm run client\"",
+    "client": "npm run start --prefix client",
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./server-src/index.ts"
+  },
+  "keywords": [],
+  "author": "Larry B Faudree Jr",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfaudreejr/CompareStockTrends.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lfaudreejr/CompareStockTrends/issues"
+  },
+  "homepage": "https://github.com/lfaudreejr/CompareStockTrends#readme",
+  "dependencies": {
+    "axios": "^0.17.0",
+    "bootstrap": "^4.0.0-beta.2",
+    "compression": "^1.7.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.33",
+    "ramda": "^0.25.0",
+    "serve-favicon": "^2.4.5",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/chai": "^4.0.4",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/compression": "0.0.34",
+    "@types/dotenv": "^4.0.2",
+    "@types/express": "^4.0.39",
+    "@types/mocha": "^2.2.44",
+    "@types/mongodb": "^2.2.15",
+    "@types/node": "^8.0.47",
+    "@types/ramda": "^0.25.3",
+    "@types/serve-favicon": "^2.2.30",
+    "@types/socket.io": "^1.4.31",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "concurrently": "^3.5.0",
+    "eslint": "^4.10.0",
+    "mocha": "^4.0.1",
+    "prettier-eslint": "^8.2.1",
+    "supertest": "^3.0.0",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  }
 }

@@ -1,17 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <HighChart/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import { mapGetters, mapActions } from 'vuex'
+import HighChart from './components/HighChart'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HighChart
+  },
+  computed: {
+    ...mapGetters({
+      socket: 'getSocket'
+    })
+  },
+  methods: {
+    ...mapActions({
+      connection: 'setConnection',
+      closeConnection: 'endConnection'
+    })
   }
 }
 </script>
