@@ -6,15 +6,14 @@ import { ResolveOptions } from 'dns'
 
 const MongoClient: mongo.MongoClient = mongo.MongoClient
 
+const URL: string = config.mongoUrl
 let db: mongo.Db
 
 export function connectDB (): any {
   return new Promise((resolve, reject) => {
     if (db) return resolve(db)
 
-    const url: string = config.mongoUrl
-
-    MongoClient.connect(url, (err: Error, _db: mongo.Db) => {
+    MongoClient.connect(URL, (err: Error, _db: mongo.Db) => {
       if (err) return reject(err)
       db = _db
       resolve(_db)
