@@ -1,4 +1,4 @@
-import mongo from './../mongoDB/'
+import mongo from '../mongoDB'
 import quandlApi from '../quandlApi/'
 import Stock from '../stocks/Stock'
 
