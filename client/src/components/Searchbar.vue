@@ -39,7 +39,7 @@ export default {
       this.getSocket.emit('search', e.target.value)
     },
     deleteStock (stock) {
-      this.removeStock(stock)
+      // this.removeStock(stock)
       this.getSocket.emit('removeStock', stock)
     },
     ...mapActions([

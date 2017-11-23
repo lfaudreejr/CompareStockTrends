@@ -16,13 +16,13 @@ function testEvents (socketParam: SocketIO.Server) {
     socket.on('search', (data: string) => {
       const search = handleSearch(data);
       search.then((results: object) => {
-        socket.broadcast.emit('results', results);
+        socketTest.emit('results', results);
       });
     });
 
     socket.on('removeStock', (stock: Stock) => {
       mongo.destroy(stock._id);
-      socket.broadcast.emit('stockRemoved', stock);
+      socketTest.emit('stockRemoved', stock);
     });
   });
   socketTest.on('disconnect', () => {

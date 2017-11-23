@@ -23,12 +23,12 @@ function testEvents(socketParam) {
         socket.on('search', (data) => {
             const search = handleSearch(data);
             search.then((results) => {
-                socket.broadcast.emit('results', results);
+                socketTest.emit('results', results);
             });
         });
         socket.on('removeStock', (stock) => {
             mongoDB_1.default.destroy(stock._id);
-            socket.broadcast.emit('stockRemoved', stock);
+            socketTest.emit('stockRemoved', stock);
         });
     }));
     socketTest.on('disconnect', () => {

@@ -151,6 +151,7 @@ export default {
       this.loadStocks(data)
     })
     this.getSocket.on('stockRemoved', (stock) => {
+      this.removeStock(stock)
       this.removeSeriesStocks(stock)
     })
   }
