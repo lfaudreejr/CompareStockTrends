@@ -1,4 +1,11 @@
 language: node_js
 node_js:
-- '8.9.1'
+- 8.9.1
 - '0.10'
+deploy:
+  provider: heroku
+  api_key:
+    secure: atPrsJ7qOVwO6OV6xS3RuimlBBtsadohvjbU8zH86iMnW+LgPVtA2DUzMzOZ8dnWW3WLzTiExKApJzolKiVQPzkT+yvmAKeGsR0ghNn2MKqobLEu4jonUnXrG2L/gt4cYES1E5AOIX6jI0UH65QkK9Q6U650s/jBuh1ucoy8wAEd5AZDvmzqzQVyh4n0zrFJVM3INOV27pa7JKUkUTdnwfpZt9dukp52SLHoSx1aRuCQvOU4fhDgb3KYTcZsvMfRXEHKVPTdx+Mdxzv6uaIwUcHu185SpkndeZf+x+2LWL/10rDXAy3Oi4ftTEFa6dYl/SWeiH3Gp33volAhoYgc6HjKzCAsYAj/l2OvrselP+t2dMJfW4JYOeyg7gtFTfa8Yckr4Raw34ia0bS38sHZ2IidehGFwvIn3AxALwzrXLtXB9mnlsF4dboDpoE6uBW8g3cDaHtz3cJnLktfR9Ai6/q4xEpHqDKk9T0BFW4+CZzLOyv3mkfp+JPiXhuYuWUTNbA0gA3uEYfnxAqnd/hWJGJD8buSmJmnyjoi5nv4oJrGE5iTiBt/Pl2msjVESSN81iyRkHF49M2h+pviWIiBhvp1oS8wnX+bNrwL6TeROzSvZLYO8uEX1mEoGTX6NjIoCGAPKqluHG9HoqdEe3d3tq9JOHXe7rtpnWM2yJT6b2o=
+  app: stocklooks
+  on:
+    repo: lfaudreejr/CompareStockTrends

@@ -1,12 +1,12 @@
 /* eslint-env node, mocha */
 import * as chai from 'chai'
 import config from '../../config/'
-import getStockFromQuandl from '../'
+import quandlApi from '../'
 import get from '../../axios/'
 
 describe('getStockFromQuandl', () => {
   it('should return json object with dataset property or error object', () => {
-    const returnObj = getStockFromQuandl('F', '2016')
+    const returnObj = quandlApi.getStock('F', '2016')
     returnObj
       .then((data: any) => {
         chai.assert.exists(data, 'stockData is not null nor undefined')
