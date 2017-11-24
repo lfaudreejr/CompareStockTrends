@@ -126,27 +126,33 @@ export default {
       'setConnection',
       'endConnection',
       'addStock',
-      'removeStock'
+      'removeStock',
+      'loading'
     ])
   },
   computed: {
     ...mapGetters([
       'getSocket',
-      'getStocks'
+      'getStocks',
+      'getLoading'
     ])
   },
   mounted () {
+    this.loading(true)
     this.setConnection('test') // TODO: remove if not testing
     this.getSocket.on('connected', (resp) => {
       if (resp) {
+        this.loading(false)
         this.addStock(resp)
         this.loadStocks(resp)
       }
     })
     this.getSocket.on('disconnect', () => {
+      this.loading(false)
       console.log('Socket disconnected')
     })
     this.getSocket.on('results', (data) => {
+      this.loading(false)
       this.addStock(data)
       this.loadStocks(data)
     })
