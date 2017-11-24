@@ -39,7 +39,7 @@ function testEvents(socketParam) {
    *  Socket handler stock search from client
    */
 function handleSearch(data) {
-    const get = _1.default.getStock(data, '2017');
+    const get = _1.default.getStock(data);
     return get
         .then((results) => __awaiter(this, void 0, void 0, function* () {
         let { id, dataset_code, name, data } = results.data.dataset;

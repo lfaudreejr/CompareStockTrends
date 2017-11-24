@@ -11,10 +11,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const _1 = require("../axios/");
 const _2 = require("./../config/");
 // getStockFromQuandl :: string -> promise {Object}
-function getStockFromQuandl(stock, start) {
+function getStockFromQuandl(stock) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
-            _1.default(`https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?api_key=${_2.default.quandlKey}&start_data=${start}`)
+            _1.default(`https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?column_index=11&exclude_column_names=true&order=asc&collapse=daily&api_key=${_2.default.quandlKey}`)
                 .then((data) => {
                 resolve(data);
             })
