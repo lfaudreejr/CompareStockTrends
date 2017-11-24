@@ -25,5 +25,8 @@ export default {
 
     stateCopy.splice(index, 1)
     state.stocks = stateCopy
+  },
+  [types.LOADING] (state, val) {
+    state.loading = val
   }
 }

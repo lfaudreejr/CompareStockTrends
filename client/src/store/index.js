@@ -8,7 +8,8 @@ Vue.use(Vuex)
 
 const state = {
   stocks: [],
-  connection: null
+  connection: null,
+  loading: false
 }
 
 export default new Vuex.Store({
