@@ -8,7 +8,7 @@ chai.use(chaiPromise);
 
 describe('quandl API', () => {
   describe('get', () => {
-    let resp = quandlApi.getStock('P', '2017');
+    let resp = quandlApi.getStock('P');
 
     it('should return a response', (done) => {
       chai.expect(resp).to.be.fulfilled.and.notify(done);

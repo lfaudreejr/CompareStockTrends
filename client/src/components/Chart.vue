@@ -107,9 +107,9 @@ export default {
     loadStocks (stock) {
       this.chartConfig.series.push({
         name: stock.name,
-        data: stock.data.reverse().map((current) => {
+        data: stock.data.map((current) => {
           return [(new Date(current[0])).getTime(),
-            current[4]]
+            current[1]]
         })
       })
     },

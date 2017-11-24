@@ -1,9 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-
+  <div>
     <chart></chart>
-
   </div>
 </template>
 
@@ -15,7 +12,7 @@ export default {
   components: { Chart },
   data () {
     return {
-      msg: 'Welcome to your App, Mr. Faudree'
+      msg: 'Stock Trends'
     }
   }
 }

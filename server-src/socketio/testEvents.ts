@@ -34,7 +34,7 @@ function testEvents (socketParam: SocketIO.Server) {
    *  Socket handler stock search from client
    */
 function handleSearch (data: string) {
-  const get = quandlApi.getStock(data, '2017');
+  const get = quandlApi.getStock(data);
 
   return get
     .then(async (results: any) => {
